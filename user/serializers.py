@@ -20,3 +20,9 @@ class UserSerializer(ModelSerializer):
             country=validated_data["country"],
         )
         return user
+
+
+class UserDataSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("username", "country")

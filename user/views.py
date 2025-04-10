@@ -1,14 +1,22 @@
 from rest_framework.response import Response
-from .serializers import UserSerializer
-from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.views import APIView
+from rest_framework.generics import CreateAPIView
+from .serializers import UserDataSerializer, UserSerializer
+from django.contrib.auth import authenticate
+from django.contrib.auth import get_user_model
 
 
-# Create your views here.
-@api_view(["POST"])
-def user_register_view(request):
-    serializer = UserSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+User = get_user_model()
+
+
+class UserRegisterView(CreateAPIView):
+    serializer_class = UserSerializer
+
+
+class UserView(APIView):
+    def post(self, request):
+        username = request.data.get("username")
+        password = request.data.get("password")
+        user = authenticate(username=username, password=password)
+        serializer = UserDataSerializer(user)
+        return Response(serializer.data)

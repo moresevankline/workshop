@@ -38,6 +38,8 @@ DEBUG = env("DEBUG")
 ALLOWED_HOSTS = [
     "workshop-uw8o.onrender.com",
     "127.0.0.1",
+    "localhost",
+    "*",
 ]
 
 
@@ -93,7 +95,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": env("NAME"),
-        "PORT": "6543",
+        "PORT": "5432",
         "PASSWORD": env("PASSWORD"),
         "HOST": env("HOST"),
         "USER": env("USER"),
