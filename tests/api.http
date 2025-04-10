@@ -1,0 +1,18 @@
+### POST Request
+POST https://workshop-uw8o.onrender.com/user/token/
+Content-Type: application/json
+
+{
+    "username": "franz",
+    "password": "franz123"
+}
+
+### POST Request with Authorization
+POST https://workshop-uw8o.onrender.com/user/registration/
+Content-Type: application/json
+
+{
+    "username": "franz",
+    "password": "franz123",
+    "country": "Philippines"
+}
